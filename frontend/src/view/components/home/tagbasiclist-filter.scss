@@ -1,0 +1,57 @@
+.tagbasiclistfilter {
+  .filter {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: rgba(244,245,249,1);
+      margin: 0;
+      padding: 0;
+      width: 100%;
+  }
+
+  .filterbar {
+      margin: 0;
+      background-color: rgba(244,245,249,1);
+      padding: 10px 0;
+      width: 100%;
+  }
+
+  .filterbarcontent {
+      width: 100%;
+      margin: 0 auto;
+      padding: 10px  20px;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: space-around;
+      align-content: center;
+  }
+
+  .filterbarcenter {
+      flex: 1;
+      background-color: white;
+      margin-right: 20px;
+      border-radius: 15px;
+  }
+
+  @media screen and (max-width: 300px) {
+    .filterboxwidth {
+          border: none;
+          margin: 0;
+          padding: 0;
+          text-align: left;
+          font-size: 1rem;
+          outline: none; 
+          width: 80%;
+    }
+}
+  .filterboxwidth {
+    border: none;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    font-size: 1rem;
+    outline: none; 
+    width: 85%;
+  }
+}

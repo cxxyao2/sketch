@@ -89,7 +89,8 @@ export class TagBasicList extends React.Component<{
           selectedColor={this.props.selectedColor}
           style={this.props.style}
           onClick={(selected:boolean) => this.props.onClick(selected, child.tagId)}
-          size={this.props.tagSize}>{child.tagName}</Tag>; })}
+          size={this.props.tagSize}>{child.tagName}</Tag>;
+          })}
         </div>
       </div>
       </div>

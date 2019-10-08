@@ -1,13 +1,23 @@
 import * as React from 'react';
 import { TagBasicList } from './tagbasic-list';
+import './tagbasiclist-filter.scss';
+
+type TagColor = 'black'|'dark'|'light'|'white'|'primary'|'link'|'info'|'success'|'warning'|'danger';
 
 export class TagBasicListFilter extends React.Component<{
   taglist:{
     tagCategoryName:string,
-    categoryTrash:boolean,
-    childTags:{ tagId:string, tagName:string,
+    childTags:{
+      tagId:string,
+      tagName:string,
       selected:boolean,
-      selectable:boolean,}[],
+      selectable:boolean}[],
+    tagSize?:'normal'|'medium'|'large',
+    tagColor?:TagColor,
+    selectedColor?:TagColor,
+    showTrashbin?:boolean,
+    backgroundColor?:TagColor,
+    style?:React.CSSProperties,
   }[];
   onBack:() => void;
   onFilter:(filCriteria:string) => void;
@@ -34,44 +44,13 @@ export class TagBasicListFilter extends React.Component<{
   }
 
   public render () {
-    return <div style={{
-      display:'flex',
-      flexDirection:'column',
-      alignItems:'center' ,
-      backgroundColor:'rgba(244,245,249,1)',
-      margin:'0',
-      padding:'0',
-      width:'100%'}} >
-      <div style={{
-        margin:'0',
-        backgroundColor:'rgba(244,245,249,1)',
-        padding: '10px 0',
-        width:'100%',
-      }}>
-        <div style={{
-          width:'100%',
-          margin:'0 auto',
-          padding:'10px  20px',
-          display:'flex',
-          flexDirection:'row',
-          flexWrap:'nowrap',
-          justifyContent:'space-around',
-          alignContent: 'center',
-        }}>
-
-        <div style={{
-            flex:'1',
-            backgroundColor: 'white',
-            marginRight:'20px',
-            borderRadius: '15px',
-        }}>
+    return <div className="tagbasiclistfilter">
+    <div className="filter" >
+      <div className="filterbar">
+        <div className="filterbarcontent">
+        <div className="filterbarcenter">
           <i className="fas fa-search" style={{margin:'0 5px 0 10px'}}></i>
-          <input type="text" placeholder=""
-          style={window.screen.width >= 400 ? {
-            border:'none', margin:'0', padding:'0', textAlign: 'left',
-            fontSize:'1rem', outline:'none', width:'90%'}:{
-              border:'none', margin:'0', padding:'0', textAlign: 'left',
-              fontSize:'1rem', outline:'none', width:'85%'}}
+          <input type="text" placeholder="" className="filterboxwidth"
             onChange={(ev) => {
               console.log(ev.target.value);
               this.setState({searchCondtion: ev.target.value});
@@ -91,15 +70,17 @@ export class TagBasicListFilter extends React.Component<{
           key={category.tagCategoryName}
           tagCategoryName={category.tagCategoryName}
           childTags={ category.childTags}
-          tagSize={'normal'}
-          tagColor={'light'}
-          selectedColor={'danger'}
-          showTrashbin={category.categoryTrash}
-          backgroundColor={'rgba(244,245,249,1)'}
+          tagSize={category.tagSize || 'normal'}
+          tagColor={category.tagColor || 'white'}
+          selectedColor={category.selectedColor || 'danger'}
+          showTrashbin={category.showTrashbin || false }
+          backgroundColor={category.backgroundColor || 'rgba(244,245,249,1)'}
+          style={category.style ||  {textDecoration:'none'}}
           onClick={(selected, selectedId) => selected && this.onDelete(selected, selectedId)}>
       </TagBasicList> ;
       })}
       </div>
+    </div>
     </div>;
   }
 }
