@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { classnames } from '../../../utils/classname';
 import { Tag } from '../common/tag';
+import './tagbasic-list.scss';
 
 type TagColor = 'black'|'dark'|'light'|'white'|'primary'|'link'|'info'|'success'|'warning'|'danger';
 type tagType = {
@@ -54,19 +55,10 @@ export class TagBasicList extends React.Component<{
 
   public render () {
     return (
+      <div className="tagbasiclist">
+            <div  className="listhead" style={{backgroundColor: this.props.backgroundColor}} >
       <div>
-      <div  style={{
-        width:'100%',
-        margin:'0 auto',
-        padding:'10px  20px',
-        borderBottom: '3px solid rgba(244,245,249,1)',
-        display:'flex',
-        flexDirection: 'column',
-        justifyContent: 'flex-start',
-        backgroundColor: this.props.backgroundColor}} >
-      <div>
-        <h6 className="title is-6"
-          style={{ float:'left', textAlign:'left', marginBottom: '5px'}}>
+        <span className="listname">
           {this.props.tagCategoryName}
           {this.state.sortAvailable && <i className={classnames(
             'fas',
@@ -82,7 +74,7 @@ export class TagBasicList extends React.Component<{
               });
             }}>
           </i>}
-        </h6>
+        </span>
         <span style={{ float:'right', display:this.props.showTrashbin ? 'inline' : 'none'}}>
           <i className="far fa-trash-alt"></i>
         </span>
