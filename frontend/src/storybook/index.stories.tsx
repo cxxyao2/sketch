@@ -39,7 +39,6 @@ import { randomCnWords } from '../utils/fake';
 import { FooterMenu } from '../view/components/common/footer-menu';
 import { SearchHomepageBar } from '../view/components/home/searchhomepage-bar';
 import { ChannelPreview } from '../view/components/home/channel-preview';
-import { TagBasic } from '../view/components/home/tagbasic';
 import { TagBasicList } from '../view/components/home/tagbasic-list';
 import { TagBasicListSelect } from '../view/components/home/tagbasiclist-select';
 import { TagBasicListFilter } from '../view/components/home/tagbasiclist-filter';
@@ -491,26 +490,22 @@ storiesOf('Home Components/HomePage', module)
       </Router>;
     }
   }))
-  .add('tagbasicMidium', () => <TagBasic
-    tagId={'233'}
-    tagName={'tag'}
-    onClick={(selected, selectedId) => {console.log('select', selectedId); } }
+  .add('tagbasicMidium', () => <Tag
     selected={false}
     size={'medium'}
     color={'light'}
     selectedColor={'danger'}
-    selectable={true}>
-    </TagBasic>)
-  .add('tagbasicSmall', () => <TagBasic
-    tagId={'233'}
-    tagName={'tag'}
-    onClick={(selected, selectedId) => {console.log('select', selectedId); } }
+    style={{textDecoration:'none'}}
+    selectable={true}>button
+    </Tag>)
+  .add('tagbasicSmall', () => <Tag
     selected={false}
     size={'normal'}
     color={'white'}
     selectedColor={'danger'}
-    selectable={true}>
-  </TagBasic>)
+    style={{textDecoration:'none'}}
+    selectable={true}>button
+  </Tag>)
   .add('TagBasicList1', () => React.createElement(class extends React.Component {
     public render () {
       return <div style={{
@@ -520,12 +515,14 @@ storiesOf('Home Components/HomePage', module)
         backgroundColor:'rgba(244,245,249,1)'}}>
         <TagBasicList
           tagCategoryName={'最近搜索'}
-          childTags={ [{tagId:'12', tagName:'星星'} , {tagId:'13' , tagName:'星星月亮'}]}
+          childTags={ [{tagId:'12', tagName:'星星', selected: false, selectable: true} , {tagId:'13' , tagName:'星星月亮', selected: false, selectable: true}]}
           tagSize={'normal'}
           tagColor={'white'}
           selectedColor={'danger'}
           showTrashbin={true}
+          sortAvailable={true}
           backgroundColor={'rgba(244,245,249,1)'}
+          style={{textDecoration:'none'}}
           onClick={(selected, selectedId) => {console.log('selectedId' , selectedId); }}>
         </TagBasicList>
       </div>;
@@ -540,7 +537,7 @@ storiesOf('Home Components/HomePage', module)
         backgroundColor:'rgba(244,245,249,1)'}}>
         <TagBasicList
           tagCategoryName={'热门推荐'}
-          childTags={ [{tagId:'12', tagName:'得偿所愿'} , {tagId:'13' , tagName:'翅膀养护日记'}]}
+          childTags={ [{tagId:'12', tagName:'得偿所愿', selected: true, selectable: true} , {tagId:'13' , tagName:'翅膀养护日记', selected: true, selectable: true}]}
           tagSize={'normal'}
           tagColor={'white'}
           selectedColor={'danger'}
@@ -560,7 +557,7 @@ storiesOf('Home Components/HomePage', module)
         backgroundColor:'white'}}>
         <TagBasicList
           tagCategoryName={'文章分类'}
-          childTags={ [{tagId:'12', tagName:'原创'} , {tagId:'13' , tagName:'同人'}]}
+          childTags={ [{tagId:'12', tagName:'原创', selected: true, selectable: true} , {tagId:'13' , tagName:'同人', selected: true, selectable: true}]}
           tagSize={'medium'}
           tagColor={'light'}
           selectedColor={'danger'}
@@ -579,10 +576,10 @@ storiesOf('Home Components/HomePage', module)
     public render () {
         return <TagBasicListSelect
         taglist={[{tagCatagoryName:'文章分类',
-        childTags:[{tagId:'12', tagName:'原创'} , {tagId:'13' , tagName:'同人'}]},
+        childTags:[{tagId:'12', tagName:'原创', selected: true, selectable: true} , {tagId:'13' , tagName:'同人', selected: true, selectable: true}]},
         {tagCatagoryName:'篇幅',
-        childTags:[{tagId:'14', tagName:'短篇'} , {tagId:'15' , tagName:'中篇'},
-        {tagId:'16', tagName:'长篇'},{tagId:'17', tagName:'大纲'}]}
+        childTags:[{tagId:'14', tagName:'短篇', selected: true, selectable: true} , {tagId:'15' , tagName:'中篇', selected: true, selectable: true},
+        {tagId:'16', tagName:'长篇', selected: true, selectable: true},{tagId:'17', tagName:'大纲', selected: true, selectable: true}]}
         ]}
         onBack={() => {console.log('back'); }}
         onFilter={() => {console.log('filter'); }}
@@ -606,11 +603,11 @@ storiesOf('Home Components/HomePage', module)
         return <TagBasicListFilter
         taglist={[{tagCategoryName:'最近搜索',
         categoryTrash:true,
-        childTags:[{tagId:'12', tagName:'夏天'} , {tagId:'13' , tagName:'星赭'}]},
+        childTags:[{tagId:'12', tagName:'夏天', selected: true, selectable: true} , {tagId:'13' , tagName:'星赭', selected: true, selectable: true}]},
         {tagCategoryName:'热门推荐',
         categoryTrash:false,
-        childTags:[{tagId:'14', tagName:'九州见闻'} , {tagId:'15' , tagName:'得偿所愿'},
-        {tagId:'16', tagName:'翅膀养护日记'},{tagId:'17', tagName:'不知道写啥'}]}
+        childTags:[{tagId:'14', tagName:'九州见闻', selected: true, selectable: true} , {tagId:'15' , tagName:'得偿所愿', selected: true, selectable: true},
+        {tagId:'16', tagName:'翅膀养护日记', selected: true, selectable: true},{tagId:'17', tagName:'不知道写啥', selected: true, selectable: true}]}
         ]}
         onBack={() => {console.log('back'); }}
         onDelete={(tags) => {
@@ -637,10 +634,10 @@ storiesOf('Home Components/HomePage', module)
       return <Router history={createBrowserHistory()}>
           <RecommendList
           taglist={[{tagCatagoryName:'文章分类',
-          childTags:[{tagId:'12', tagName:'原创'} , {tagId:'13' , tagName:'同人'}]},
+          childTags:[{tagId:'12', tagName:'原创', selected: true, selectable: true} , {tagId:'13' , tagName:'同人', selected: true, selectable: true}]},
           {tagCatagoryName:'篇幅',
-          childTags:[{tagId:'14', tagName:'长篇'} , {tagId:'15' , tagName:'中篇'},
-          {tagId:'16', tagName:'短篇'},{tagId:'17', tagName:'大纲'}]}
+          childTags:[{tagId:'14', tagName:'长篇', selected: true, selectable: true} , {tagId:'15' , tagName:'中篇', selected: true, selectable: true},
+          {tagId:'16', tagName:'短篇', selected: true, selectable: true},{tagId:'17', tagName:'大纲', selected: true, selectable: true}]}
           ]}
           threads={items}
           onBack={() => {}}

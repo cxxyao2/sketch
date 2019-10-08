@@ -1,11 +1,13 @@
 import * as React from 'react';
 import { classnames } from '../../../utils/classname';
-import { TagBasic } from './tagbasic';
+import { Tag } from '../common/tag';
 
 type TagColor = 'black'|'dark'|'light'|'white'|'primary'|'link'|'info'|'success'|'warning'|'danger';
 type tagType = {
   tagId:string,
   tagName:string,
+  selected:boolean,
+  selectable:boolean,
 };
 
 export class TagBasicList extends React.Component<{
@@ -52,6 +54,7 @@ export class TagBasicList extends React.Component<{
 
   public render () {
     return (
+      <div>
       <div  style={{
         width:'100%',
         margin:'0 auto',
@@ -86,18 +89,17 @@ export class TagBasicList extends React.Component<{
       </div>
       <div className={classnames('tags')} >
           {this.state.myChildTags.map((child, inx) => {
-          return   <TagBasic
+          return   <Tag
           key={child.tagId}
-          selected={false}
-          selectable={true}
+          selected={child.selected}
+          selectable={child.selectable}
+          color={this.props.tagColor}
           selectedColor={this.props.selectedColor}
-          onClick={(selected, selectedId) => 
-            {
-              this.props.onClick(selected, selectedId);
-            }} 
-          tagId={child.tagId} tagName={child.tagName}
-          size={this.props.tagSize} color={this.props.tagColor}></TagBasic>; })}
+          style={this.props.style}
+          onClick={(selected:boolean) => this.props.onClick(selected, child.tagId)}
+          size={this.props.tagSize}>{child.tagName}</Tag>; })}
         </div>
+      </div>
       </div>
       );
   }

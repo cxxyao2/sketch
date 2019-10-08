@@ -6,7 +6,8 @@ import { TagBasicList } from './tagbasic-list';
 
 type taglistType = {
   tagCatagoryName:string,
-  childTags:{ tagId:string, tagName:string}[],
+  childTags:{ tagId:string, tagName:string,selected:boolean,
+    selectable:boolean,}[],
 };
 
 export class RecommendList extends React.Component<{

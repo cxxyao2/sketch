@@ -5,7 +5,9 @@ export class TagBasicListFilter extends React.Component<{
   taglist:{
     tagCategoryName:string,
     categoryTrash:boolean,
-    childTags:{ tagId:string, tagName:string}[],
+    childTags:{ tagId:string, tagName:string,
+      selected:boolean,
+      selectable:boolean,}[],
   }[];
   onBack:() => void;
   onFilter:(filCriteria:string) => void;
@@ -90,7 +92,7 @@ export class TagBasicListFilter extends React.Component<{
           tagCategoryName={category.tagCategoryName}
           childTags={ category.childTags}
           tagSize={'normal'}
-          tagColor={'white'}
+          tagColor={'light'}
           selectedColor={'danger'}
           showTrashbin={category.categoryTrash}
           backgroundColor={'rgba(244,245,249,1)'}
