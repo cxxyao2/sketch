@@ -1,25 +1,11 @@
 import * as React from 'react';
-import { TagBasicList } from './tagbasic-list';
+import { TagBasicList, TagListType } from './tagbasic-list';
 import './tagbasiclist-select.scss';
 
-type TagColor = 'black'|'dark'|'light'|'white'|'primary'|'link'|'info'|'success'|'warning'|'danger';
-type taglistType = {
-  tagCatagoryName:string,
-  childTags:{
-    tagId:string,
-    tagName:string,
-    selected:boolean,
-    selectable:boolean}[],
-    tagSize?:'normal'|'medium'|'large',
-  tagColor?:TagColor,
-  selectedColor?:TagColor,
-  showTrashbin?:boolean,
-  backgroundColor?:TagColor,
-  style?:React.CSSProperties,
-};
+
 
 export class TagBasicListSelect extends React.Component<{
-  taglist:taglistType[];
+  taglist:TagListType[];
   onBack:() => void;
   onFilter:() => void;
   selectedCounter:number;
@@ -27,8 +13,8 @@ export class TagBasicListSelect extends React.Component<{
 }, {
 }>  {
 
-  private selectedTags:string[] = [];
-  public onClick = (selected:boolean, selectedId:string) => {
+  private selectedTags:number[] = [];
+  public onClick = (selected:boolean, selectedId:number) => {
     if (this.selectedTags.length === 0){
       this.selectedTags.push(selectedId);
       this.props.onSelect && this.props.onSelect(this.selectedTags);
@@ -61,16 +47,17 @@ export class TagBasicListSelect extends React.Component<{
         取消选择({this.props.selectedCounter})</div> }
         {this.props.taglist.map((category) => {
         return  <TagBasicList
-          key={category.tagCatagoryName}
-          tagCategoryName={category.tagCatagoryName}
+          key={category.tagCategoryName}
+          tagCategoryName={category.tagCategoryName}
           childTags={ category.childTags}
           tagSize={category.tagSize || 'medium'}
           tagColor={category.tagColor || 'light'}
           selectedColor={category.selectedColor || 'danger'}
-          showTrashbin={category.showTrashbin || false }
+          selectable={category.selectable || true}
+          showTrashBin={category.showTrashBin || false }
           backgroundColor={category.backgroundColor || 'white'}
           style={category.style ||  {textDecoration:'none'}}
-          onClick={(selected, selectedId) => this.onClick(selected,selectedId)}>
+          onClick={(selected, selectedId) => this.onClick(selected, selectedId)}>
       </TagBasicList> ;
       })}
       </div>

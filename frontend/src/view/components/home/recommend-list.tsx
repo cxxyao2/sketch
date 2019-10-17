@@ -2,28 +2,10 @@ import * as React from 'react';
 import { Link  } from 'react-router-dom';
 import { Popup } from '../common/popup';
 import './recommend-list.scss';
-import { TagBasicList } from './tagbasic-list';
-
-type TagColor = 'black'|'dark'|'light'|'white'|'primary'|'link'|'info'|'success'|'warning'|'danger';
-
-type taglistType = {
-  tagCatagoryName:string,
-  childTags:{
-    tagId:string,
-    tagName:string,
-    selected:boolean,
-    selectable:boolean}[],
-  tagSize?:'normal'|'medium'|'large',
-  tagColor?:TagColor,
-  selectedColor?:TagColor,
-  showTrashbin?:boolean,
-  backgroundColor?:TagColor,
-  style?:React.CSSProperties,
-
-};
+import { TagBasicList, TagListType } from './tagbasic-list';
 
 export class RecommendList extends React.Component<{
-  taglist:taglistType[];
+  taglist:TagListType[];
   threads:{id:number, channel_id:number, title:string, brief:string, author:string }[];
   onBack:() => void;
   onSearch:() => void;
@@ -54,7 +36,7 @@ export class RecommendList extends React.Component<{
     });
   }
 
-  public onSelectTag = (selected:boolean, selectedId:string) => {
+  public onSelectTag = (selected:boolean, selectedId:number) => {
     // 选中1个tag
   }
 
@@ -105,13 +87,14 @@ export class RecommendList extends React.Component<{
           }); }}>
           {this.props.taglist.map((category) => {
             return  <TagBasicList
-            key={category.tagCatagoryName}
-            tagCategoryName={category.tagCatagoryName}
+            key={category.tagCategoryName}
+            tagCategoryName={category.tagCategoryName}
             childTags={ category.childTags}
             tagSize={category.tagSize || 'medium'}
             tagColor={category.tagColor || 'light'}
+            selectable={category.selectable || true}
             selectedColor={category.selectedColor || 'danger'}
-            showTrashbin={category.showTrashbin || false }
+            showTrashBin={category.showTrashBin || false }
             backgroundColor={category.backgroundColor || 'white'}
             style={category.style ||  {textDecoration:'none'}}
             onClick={(selected, selectedId) => this.onSelectTag(selected, selectedId)}>

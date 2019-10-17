@@ -445,13 +445,13 @@ storiesOf('Home Components/HomePage', module)
   .add('ChannelPreview', () => React.createElement(class extends React.Component {
     public render () {
       const items = [
-        {id:1, channel_id:1, title:'春潮', brief:'我要吞下蛮荒的野兽本性我要吞下蛮荒的野兽本性我要吞下蛮荒的野兽本性我要吞下蛮荒的野兽本性我要吞下蛮荒的野兽本性我要吞下蛮荒的野兽本性我要吞下蛮荒的野兽本性我要吞下蛮荒的野兽本性我要吞下蛮荒的野兽本性', author:'小山鬼'},
-        {id:2, channel_id:1, title:'stay gold', brief:'娱乐圈万人迷娱乐圈万人迷娱乐圈万人迷娱乐圈万人迷娱乐圈万人迷娱乐圈万人迷娱乐圈万人迷娱乐圈万人迷娱乐圈万人迷娱乐圈万人迷娱乐圈万人迷娱乐圈万人迷娱乐圈万人迷娱乐圈万人迷', author:'草率'},
-        {id:3, channel_id:1, title:'英国病人', brief:'我要吞下蛮荒的野兽本性我要吞下蛮荒的野兽本性我要吞下蛮荒的野兽本性我要吞下蛮荒的野兽本性我要吞下蛮荒的野兽本性我要吞下蛮荒的野兽本性我要吞下蛮荒的野兽本性我要吞下蛮荒的野兽本性我要吞下蛮荒的野兽本性', author:'小山鬼'},
+        {id: 1, channel_id: 1, title: '春潮', brief: '我要吞下蛮荒的野兽本性我要吞下蛮荒的野兽本性我要吞下蛮荒的野兽本性我要吞下蛮荒的野兽本性我要吞下蛮荒的野兽本性我要吞下蛮荒的野兽本性我要吞下蛮荒的野兽本性我要吞下蛮荒的野兽本性我要吞下蛮荒的野兽本性', author:'小山鬼'},
+        {id: 2, channel_id: 1, title: 'stay gold', brief: '娱乐圈万人迷娱乐圈万人迷娱乐圈万人迷娱乐圈万人迷娱乐圈万人迷娱乐圈万人迷娱乐圈万人迷娱乐圈万人迷娱乐圈万人迷娱乐圈万人迷娱乐圈万人迷娱乐圈万人迷娱乐圈万人迷娱乐圈万人迷', author:'草率'},
+        {id: 3, channel_id: 1, title: '英国病人', brief: '我要吞下蛮荒的野兽本性我要吞下蛮荒的野兽本性我要吞下蛮荒的野兽本性我要吞下蛮荒的野兽本性我要吞下蛮荒的野兽本性我要吞下蛮荒的野兽本性我要吞下蛮荒的野兽本性我要吞下蛮荒的野兽本性我要吞下蛮荒的野兽本性', author:'小山鬼'},
     ];
       return <Router history={createBrowserHistory()}>
           <ChannelPreview
-          channel={{id:1, name: '推荐榜单'}}
+          channel={{id: 1, name: '推荐榜单'}}
           threads={items}>
         </ChannelPreview>
         </Router>;
@@ -468,11 +468,11 @@ storiesOf('Home Components/HomePage', module)
     };
     public render () {
       const items = [
-        {to: '', label: '首页', icon: 'fas fa-home', defaultColor:'black', selectedColor:'red'},
-        {to: '', label: '论坛', icon: 'fas fa-comments', defaultColor:'black', selectedColor:'red'},
-        {to: '', label: '动态', icon: 'far fa-compass', defaultColor:'black', selectedColor:'red'},
-        {to: '', label: '收藏', icon: 'far fa-star', defaultColor:'black', selectedColor:'red'},
-        {to: '', label: '我的', icon: 'far fa-user', defaultColor:'black', selectedColor:'red'},
+        {to: '', label: '首页', icon: 'fas fa-home', defaultColor: 'black', selectedColor: 'red'},
+        {to: '', label: '论坛', icon: 'fas fa-comments', defaultColor: 'black', selectedColor:' red'},
+        {to: '', label: '动态', icon: 'far fa-compass', defaultColor: 'black', selectedColor: 'red'},
+        {to: '', label: '收藏', icon: 'far fa-star', defaultColor: 'black', selectedColor: 'red'},
+        {to: '', label: '我的', icon: 'far fa-user', defaultColor: 'black', selectedColor: 'red'},
       ];
       return <Router history={createBrowserHistory()}>
       <div style={{
@@ -516,13 +516,14 @@ storiesOf('Home Components/HomePage', module)
         <TagBasicList
           tagCategoryName={'最近搜索'}
           childTags={[
-            {tagId: '12', tagName: '星星', selected: false, selectable: true},
-            {tagId: '13' , tagName: '星星月亮', selected: false, selectable: true},
+            {type: 'tag', id: 12, attributes: {tag_name: '得偿所愿', tag_type: 'xx'} },
+            {type: 'tag', id: 13, attributes: {tag_name: '翅膀养护日记', tag_type: 'xx'} },
           ]}
           tagSize={'normal'}
           tagColor={'white'}
           selectedColor={'danger'}
-          showTrashbin={true}
+          selectable={true}
+          showTrashBin={true}
           sortAvailable={true}
           backgroundColor={'rgba(244,245,249,1)'}
           style={{textDecoration:'none'}}
@@ -541,13 +542,14 @@ storiesOf('Home Components/HomePage', module)
         <TagBasicList
           tagCategoryName={'热门推荐'}
           childTags={[
-            {tagId: '12', tagName: '得偿所愿', selected: true, selectable: true},
-            {tagId: '13' , tagName: '翅膀养护日记', selected: true, selectable: true},
+            {type: 'tag', id: 12, attributes: {tag_name: '得偿所愿', tag_type: 'xx'} },
+            {type: 'tag', id: 13, attributes: {tag_name: '翅膀养护日记', tag_type: 'xx'} },
           ]}
           tagSize={'normal'}
           tagColor={'white'}
+          selectable={true}
           selectedColor={'danger'}
-          showTrashbin={false}
+          showTrashBin={false}
           backgroundColor={'rgba(244,245,249,1)'}
           onClick={(selected, selectedId) => action('onClick')}>
         </TagBasicList>
@@ -564,13 +566,14 @@ storiesOf('Home Components/HomePage', module)
         <TagBasicList
           tagCategoryName={'文章分类'}
           childTags={[
-            {tagId: '12', tagName: '原创', selected: true, selectable: true},
-            {tagId: '13' , tagName: '同人', selected: true, selectable: true},
+            {type: 'tag', id: 12, attributes: {tag_name: '原创', tag_type: 'xx'} },
+            {type: 'tag', id: 13, attributes: {tag_name: '同人', tag_type: 'xx'} },
           ]}
           tagSize={'medium'}
           tagColor={'light'}
+          selectable={true}
           selectedColor={'danger'}
-          showTrashbin={false}
+          showTrashBin={false}
           backgroundColor={'white'}
           onClick={(selected, selectedId) => action('onClick')}>
         </TagBasicList>
@@ -585,17 +588,21 @@ storiesOf('Home Components/HomePage', module)
     public render () {
         return <TagBasicListSelect
         taglist={[
-        {tagCatagoryName:'文章分类',
-          childTags:[
-            {tagId:'12', tagName:'原创', selected: true, selectable: true},
-            {tagId:'13' , tagName:'同人', selected: true, selectable: true},
-            ]},
-        {tagCatagoryName:'篇幅',
-          childTags:[
-            {tagId:'14', tagName:'短篇', selected: true, selectable: true},
-            {tagId:'15' , tagName:'中篇', selected: true, selectable: true},
-            {tagId:'16', tagName:'长篇', selected: true, selectable: true},
-            {tagId:'17', tagName:'大纲', selected: true, selectable: true}
+          {
+            tagCategoryName: '文章分类',
+            childTags:
+            [
+              {type: 'tag', id: 12, attributes: {tag_name: '原创', tag_type: 'xx'} },
+              {type: 'tag', id: 13, attributes: {tag_name: '同人', tag_type: 'xx'} },
+            ]
+          },
+          {
+            tagCategoryName: '篇幅',
+            childTags:[
+              {type: 'tag', id: 14, attributes: {tag_name: '短篇', tag_type: 'xx'} },
+              {type: 'tag', id: 15, attributes: {tag_name: '中篇', tag_type: 'xx'} },
+              {type: 'tag', id: 16, attributes: {tag_name: '长篇', tag_type: 'xx'} },
+              {type: 'tag', id: 17, attributes: {tag_name: '大纲', tag_type: 'xx'} },
           ]},
         ]}
         onBack={() => action('onBack')}
@@ -619,18 +626,18 @@ storiesOf('Home Components/HomePage', module)
         return <TagBasicListFilter
         taglist={[
           {tagCategoryName:'最近搜索',
-          showTrashbin:true,
+          showTrashBin:true,
           childTags:[
-            {tagId:'12', tagName:'夏天', selected: false, selectable: true},
-            {tagId:'13' , tagName:'星赭', selected: true, selectable: true},
+            {type: 'tag', id: 12, attributes: {tag_name: '夏天', tag_type: 'xx'} },
+            {type: 'tag', id: 13, attributes: {tag_name: '星赭', tag_type: 'xx'} },
           ]},
           {tagCategoryName:'热门推荐',
-          showTrashbin:false,
+          showTrashBin:false,
           childTags:[
-            {tagId:'14', tagName:'九州见闻', selected: true, selectable: true},
-            {tagId:'15' , tagName:'得偿所愿', selected: true, selectable: true},
-            {tagId:'16', tagName:'翅膀养护日记', selected: false, selectable: true},
-            {tagId:'17', tagName:'不知道写啥', selected: true, selectable: true},
+            {type: 'tag', id: 14, attributes: {tag_name: '九州见闻', tag_type: 'xx'} },
+            {type: 'tag', id: 15, attributes: {tag_name: '得偿所愿', tag_type: 'xx'} },
+            {type: 'tag', id: 16, attributes: {tag_name: '翅膀养护日记', tag_type: 'xx'} },
+            {type: 'tag', id: 17, attributes: {tag_name: '不知道写啥', tag_type: 'xx'} },
           ]},
           ]}
         onBack={() => action('onBack')}
@@ -655,23 +662,23 @@ storiesOf('Home Components/HomePage', module)
       return <Router history={createBrowserHistory()}>
           <RecommendList
           taglist={[
-            {tagCatagoryName:'文章分类',
+            {tagCategoryName:'文章分类',
               childTags:[
-                {tagId:'12', tagName:'原创', selected: true, selectable: true},
-                {tagId:'13' , tagName:'同人', selected: true, selectable: true},
+                {type: 'tag', id: 12, attributes: {tag_name: '原创', tag_type: 'xx'} },
+                {type: 'tag', id: 13, attributes: {tag_name: '同人', tag_type: 'xx'} },
             ]},
-            {tagCatagoryName:'篇幅',
+            {tagCategoryName:'篇幅',
               childTags:[
-              {tagId:'14', tagName:'长篇', selected: true, selectable: true},
-              {tagId:'15' , tagName:'中篇', selected: true, selectable: true},
-              {tagId:'16', tagName:'短篇', selected: true, selectable: true},
-              {tagId:'17', tagName:'大纲', selected: true, selectable: true}
+              {type: 'tag', id: 14, attributes: {tag_name: '长篇', tag_type: 'xx'} },
+              {type: 'tag', id: 15, attributes: {tag_name: '中篇', tag_type: 'xx'} },
+              {type: 'tag', id: 16, attributes: {tag_name: '短篇', tag_type: 'xx'} },
+              {type: 'tag', id: 17, attributes: {tag_name: '大纲', tag_type: 'xx'} },
             ]},
             ]}
           threads={items}
-          onBack={() => {}}
-          onSearch={() => {}}
-          onShowTags={() => {}}>
+          onBack={() => action('onBack')}
+          onSearch={() => action('onSearch')}
+          onShowTags={() => action('onShowTags')}>
         </RecommendList>
         </Router>;
     }

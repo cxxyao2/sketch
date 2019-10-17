@@ -1,26 +1,35 @@
 import * as React from 'react';
 import { classnames } from '../../../utils/classname';
-import { Tag } from '../common/tag';
+import { Tag, TagColor } from '../common/tag';
 import './tagbasic-list.scss';
+import { ResData } from '../../../config/api';
 
-type TagColor = 'black'|'dark'|'light'|'white'|'primary'|'link'|'info'|'success'|'warning'|'danger';
-type tagType = {
-  tagId:string,
-  tagName:string,
-  selected:boolean,
-  selectable:boolean,
+export type TagListType = {
+  tagCategoryName:string,
+  childTags:ResData.Tag[],
+  tagSize?:'normal'|'medium'|'large',
+  tagColor?:TagColor,
+  selectable?:boolean,
+  selectedColor?:TagColor,
+  showTrashBin?:boolean,
+  backgroundColor?:string,
+  className?:string;
+  style?:React.CSSProperties;
+  sortAvailable?:boolean;
+  sortFlag?:boolean;
 };
 
 export class TagBasicList extends React.Component<{
   // props
   tagCategoryName:string;
-  childTags:tagType[];
+  childTags:ResData.Tag[];
   tagSize:'normal'|'medium'|'large',
   tagColor:TagColor,
+  selectable:boolean,
   selectedColor:TagColor,
-  showTrashbin:boolean,
-  onClick:(selected:boolean, selectedId:string) => void;
-  backgroundColor: string,
+  showTrashBin:boolean,
+  onClick:(selected:boolean, selectedId:number) => void;
+  backgroundColor?:string,
   className?:string;
   style?:React.CSSProperties;
   sortAvailable?:boolean;
@@ -29,7 +38,7 @@ export class TagBasicList extends React.Component<{
   // states
   sortFlag:boolean;
   sortAvailable:boolean;
-  myChildTags:tagType[];
+  myChildTags:ResData.Tag[];
 }> {
   public state = {
     sortAvailable: this.props.sortAvailable || false, // false, 默认排序按钮不可见
@@ -38,18 +47,15 @@ export class TagBasicList extends React.Component<{
   };
 
   public onSort = (sortFlag:boolean) => {
-    console.log('click onsort', sortFlag);
     const childTags = [...this.state.myChildTags];
-    console.log('tags',childTags);
     // false,升序
     if (!sortFlag) {
-      childTags.sort( (a, b) => (a.tagName > b.tagName) ? 1 : ((b.tagName > a.tagName) ? -1 : 0));
+      childTags.sort( (a, b) => (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0));
     }
     //true,降序
     if (sortFlag) {
-      childTags.sort( (a, b) => (a.tagName > b.tagName) ? -1 : ((b.tagName > a.tagName) ? 1 : 0));
+      childTags.sort( (a, b) => (a.id > b.id) ? -1 : ((b.id > a.id) ? 1 : 0));
     }
-    console.log('tags2',childTags);
     this.setState({myChildTags:childTags});
   }
 
@@ -75,21 +81,20 @@ export class TagBasicList extends React.Component<{
             }}>
           </i>}
         </span>
-        <span style={{ float:'right', display:this.props.showTrashbin ? 'inline' : 'none'}}>
+        <span style={{ float:'right', display:this.props.showTrashBin ? 'inline' : 'none'}}>
           <i className="far fa-trash-alt"></i>
         </span>
       </div>
       <div className={classnames('tags')} >
           {this.state.myChildTags.map((child, inx) => {
           return   <Tag
-          key={child.tagId}
-          selected={child.selected}
-          selectable={child.selectable}
+          key={child.id}
+          selectable={this.props.selectable || true}
           color={this.props.tagColor}
           selectedColor={this.props.selectedColor}
           style={this.props.style}
-          onClick={(selected:boolean) => this.props.onClick(selected, child.tagId)}
-          size={this.props.tagSize}>{child.tagName}</Tag>;
+          onClick={(selected:boolean) => this.props.onClick(selected, child.id)}
+          size={this.props.tagSize}>{child.attributes.tag_name}</Tag>;
           })}
         </div>
       </div>

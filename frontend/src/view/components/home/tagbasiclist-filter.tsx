@@ -1,33 +1,19 @@
 import * as React from 'react';
-import { TagBasicList } from './tagbasic-list';
+import { TagBasicList, TagListType } from './tagbasic-list';
 import './tagbasiclist-filter.scss';
 
-type TagColor = 'black'|'dark'|'light'|'white'|'primary'|'link'|'info'|'success'|'warning'|'danger';
 
 export class TagBasicListFilter extends React.Component<{
-  taglist:{
-    tagCategoryName:string,
-    childTags:{
-      tagId:string,
-      tagName:string,
-      selected:boolean,
-      selectable:boolean}[],
-    tagSize?:'normal'|'medium'|'large',
-    tagColor?:TagColor,
-    selectedColor?:TagColor,
-    showTrashbin?:boolean,
-    backgroundColor?:TagColor,
-    style?:React.CSSProperties,
-  }[];
+  taglist:TagListType[];
   onBack:() => void;
   onFilter:(filCriteria:string) => void;
   onDelete:([]) => void;
 }, {
-  searchCondtion:string;
+  searchCondition:string;
 }>  {
 
-  private selectedTags:string[] = [];
-  public onDelete = (selected:boolean, selectedId:string) => {
+  private selectedTags:number[] = [];
+  public onClick = (selected:boolean, selectedId:number) => {
     if (this.selectedTags.length === 0) {
       this.selectedTags.push(selectedId);
       this.props.onDelete && this.props.onDelete(this.selectedTags);
@@ -53,12 +39,12 @@ export class TagBasicListFilter extends React.Component<{
           <input type="text" placeholder="" className="filterboxwidth"
             onChange={(ev) => {
               console.log(ev.target.value);
-              this.setState({searchCondtion: ev.target.value});
+              this.setState({searchCondition: ev.target.value});
             }}
             onKeyDown={(ev) => {
               // 如果按下回车键&&值不为空,
-              if (ev.keyCode === 13 && this.state.searchCondtion) {
-                this.props.onFilter(this.state.searchCondtion);
+              if (ev.keyCode === 13 && this.state.searchCondition) {
+                this.props.onFilter(this.state.searchCondition);
               }
             }}
             />
@@ -73,10 +59,11 @@ export class TagBasicListFilter extends React.Component<{
           tagSize={category.tagSize || 'normal'}
           tagColor={category.tagColor || 'white'}
           selectedColor={category.selectedColor || 'danger'}
-          showTrashbin={category.showTrashbin || false }
+          selectable={category.selectable || true}
+          showTrashBin={category.showTrashBin || false }
           backgroundColor={category.backgroundColor || 'rgba(244,245,249,1)'}
           style={category.style ||  {textDecoration:'none'}}
-          onClick={(selected, selectedId) => selected && this.onDelete(selected, selectedId)}>
+          onClick={(selected, selectedId) => selected && this.onClick(selected, selectedId)}>
       </TagBasicList> ;
       })}
       </div>
