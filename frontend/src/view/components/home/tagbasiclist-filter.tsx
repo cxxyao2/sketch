@@ -2,7 +2,6 @@ import * as React from 'react';
 import { TagBasicList, TagListType } from './tagbasic-list';
 import './tagbasiclist-filter.scss';
 
-
 export class TagBasicListFilter extends React.Component<{
   taglist:TagListType[];
   onBack:() => void;
